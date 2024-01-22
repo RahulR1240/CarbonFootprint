@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title></title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="{{url_for('static',filename='js/jquery-3.1.1.min.js')}}"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js'></script>
+  <script src="../static/js/countUp.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  	<script src="{{url_for('static',filename='js/raphael-2.1.4.min.js')}}"></script>
+	<script src="{{url_for('static',filename='js/justgage.js')}}"></script>
+  <style>
+   body{background:url("../static/images/img.jpg");background-repeat: no-repeat;background-position: center;background-attachment: fixed;background-size:cover;overflow:hidden;}
+  .questions{width:20%;margin:auto;}
+  .question_{width:50%;margin:auto;}
+  .btn,.input-lg{border-radius:30px;}
+  .input-nam{background:#eee;height:50px;margin:auto;line-height:50px;border-radius:30px;width:60%;}
+  .input-nam-hata{background:aqua;height:50px;margin:auto;line-height:50px;border-radius:30px;}
+  .fa-2x{float:left;}
+  .yrmnthslct{border:none;background:none;}
+  .slide-down-page {position: absolute;width: 100%;box-sizing: content-box;background-color: white;}
+  .input-group{right:-1.3px;}
+  .pdcselectdiv{right:-16.5px}
+  .heading{text-transform: uppercase;font-weight: 600;font-size: x-large;}
+  .writtendatapledge{background:white;}
+  /**/
+  		.other-foot:hover{
+		color:green;text-decoration:none;cursor:pointer;}
+		input[type=checkbox]{width:30px;height:30px;}
+		.well{min-height:400px;}
+  </style>
+<script>
+$(document).ready(function(){
+	$(function() {
+	$('select,input').change(function() {
+		$.getJSON('/background_process_new', {
+			country_name_new: $('#country_name_new').val(),
+			no_people_input_new: $('#no_people_input_new').val(),
+			electricity_input_new: $('#electricity_input_new').val(),
+			lpg_new: $('#lpg_new').val(),
+			cng_new: $('#cng_new').val(),
+			png_new: $('#png_new').val(),
+			smallcar_new: $('#smallcar_new').val(),
+			mediumcar_new: $('#mediumcar_new').val(),
+			largecar_new: $('#largecar_new').val(),
+			bike_new: $('#bike_new').val(),
+			taxi_new: $('#taxi_new').val(),
+			auto_new: $('#auto_new').val(),
+			train_new: $('#train_new').val(),
+			bus_new: $('#bus_new').val(),
+			domflight_new: $('#domflight_new').val(),
+			intflight_new: $('#intflight_new').val(),
+			waste_new: $('#waste_new').val(),
+			smallfuel: $('#smallfuel').val(),
+			mediumfuel: $('#mediumfuel').val(),
+			largefuel: $('#largefuel').val(),
+			// selection of month and year
+			yrmnthslct_electricity: $('#yrmnthslct_electricity').val(),
+			yrmnthslct_lpg: $('#yrmnthslct_lpg').val(),
+			yrmnthslct_cng: $('#yrmnthslct_cng').val(),
+			yrmnthslct_png: $('#yrmnthslct_png').val(),
+			yrmnthslct_smallcar: $('#yrmnthslct_smallcar').val(),
+			yrmnthslct_mediumcar: $('#yrmnthslct_mediumcar').val(),
+			yrmnthslct_largecar: $('#yrmnthslct_largecar').val(),
+			yrmnthslct_bike: $('#yrmnthslct_bike').val(),
+			yrmnthslct_taxi: $('#yrmnthslct_taxi').val(),
+			yrmnthslct_auto: $('#yrmnthslct_auto').val(),
+			yrmnthslct_train: $('#yrmnthslct_train').val(),
+			yrmnthslct_bus: $('#yrmnthslct_bus').val(),
+			yrmnthslct_dom: $('#yrmnthslct_dom').val(),
+			yrmnthslct_int: $('#yrmnthslct_int').val(),
+			yrmnthslct_waste: $('#yrmnthslct_waste').val()
+		}, function(data) {
+		var percentageresult = data.result[17];
+		if(percentageresult < 10){
+									$("body").css({"background":'url("../static/images/img.jpg") no-repeat',"background-position": 'center','background-attachment': 'fixed','background-size':'cover'});
+									$("#result_new").css("color",'#00FF00');
+									}
+		if(percentageresult >= 10){
+									$("body").css({"background":'url("../static/images/img.jpg") no-repeat',"background-position": 'center','background-attachment': 'fixed','background-size':'cover'});
+									$("#result_new").css("color",'#66ff00');
+									}
+		if(percentageresult >= 20){
+									$("body").css({"background":'url("../static/images/img.jpg") no-repeat',"background-position": 'center','background-attachment': 'fixed','background-size':'cover'});
+									$("#result_new").css("color",'#ccff00');
+									}
+		if(percentageresult >= 35){
+									$("body").css({"background":'url("../static/images/img.jpg") no-repeat',"background-position": 'center','background-attachment': 'fixed','background-size':'cover'});
+									$("#result_new").css("color",'#FFFF00');
+									}
+		if(percentageresult >= 55){
+									$("body").css({"background":'url("../static/images/img.jpg") no-repeat',"background-position": 'center','background-attachment': 'fixed','background-size':'cover'});
+									$("#result_new").css("color",'#ff9900');
+									}
+		if(percentageresult >= 75){
+									$("body").css({"background":'url("../static/images/img.png") no-repeat',"background-position": 'center','background-attachment': 'fixed','background-size':'cover'});
+									$("#result_new").css("color",'#FF3300');
+									}
+		if(percentageresult >= 90){
+									$("body").css({"background":'url("../static/images/img.png") no-repeat',"background-position": 'center','background-attachment': 'fixed','background-size':'cover'});
+									$("#result_new").css("color",'#FF0000');
+									}
+	  //$(".result_new").html(data.result);
+	var options = {
+		  useEasing : true, 
+		  useGrouping : true, 
+		  separator : ',', 
+		  decimal : '.', 
+		  prefix : '', 
+		  suffix : '' 
+	};
+
+var a= data.result[0];
+var demo = new CountUp("result_new", 0, a,2,2, options);
+demo.start();
+
+var barChartData = {
+labels: ["Electricity", "LPG uses", "CNG uses", "PNG uses", "Personal Car (small)","Personal Car (medium)", "Personal Car (large)", "Motor Bike", "Taxi", "Auto","Train", "Bus", "Flight (Domestic)", "Flight (International)", "Waste"],
+datasets: [{
+    label: 'tonnes of carbon',
+	data: [data.result[1],data.result[2],data.result[3],data.result[4],data.result[5],data.result[6],data.result[7],data.result[8],data.result[9],data.result[10],data.result[11],data.result[12],data.result[13],data.result[14],data.result[15]],
+    backgroundColor: [
+						"#3e95cd",
+						"#3e95cd",
+						"#3e95cd",
+						"#3e95cd",
+						"#8e5ea2",
+						"#8e5ea2",
+						"#8e5ea2",
+						"#8e5ea2",
+						"#3cba9f",
+						"#3cba9f",
+						"#3cba9f",
+						"#3cba9f",
+						"#e8c3b9",
+						"#e8c3b9",
+						"#c45850"]
+}]
+}
+
+  var context = document.getElementById('myChart').getContext('2d');
+  var myBar = new Chart(context, {
+      type: 'bar',
+
+      data: barChartData,
+      options: {
+
+          title:{
+              display:false,
+              text:"Chart.js Bar Chart - Stacked"
+          },
+          tooltips: {
+              mode: 'label'
+          }
+      }
+  });
+
+
+
+
+});
+});
+});
+});
+</script>
+
+</head>
+
+<body class="jumbotron text-center content">
+
+<div hidden>
+<img src="../static/images/img.jpg">
+<img src="../static/images/img.jpg">
+<img src="../static/images/img.jpg">
+<img src="../static/images/img.jpg">
+<img src="../static/images/img.jpg">
+<img src="../static/images/img.png">
+<img src="../static/images/img.png">
+</div>
+<div class='content'>
+	<!--
+	<img src='../static/images/tcslogo.png' style='height: 85px;position: absolute;left: 35px;top: 30px;'>
+	<span style=' 
+	position: absolute;
+    right: 35px;
+    top: 50px;
+    font-size: 1.8em;
+    font-weight: 700;
+    color: #5f68c3;
+    text-transform: uppercase;'>Carbon Footprint <br>Calculator</span>
+-->
+	<br>
+{%block div%}{%endblock%}
+<!-- Large modal -->
+<div style='position:absolute;bottom:50px;left:30px;' id="resulticon" hidden>
+	<div><span id="result_new" style="font-size: 1.8em;font-weight: 800;">0</span><br>tonnes of carbon</div>
+	<!--<button class="btn btn1 btn-primary open" style='border-radius:90%;'><i class="fa fa-bar-chart" aria-hidden="true"></i></button>-->
+	<button class="btn btn1 btn-primary open" style='/*border-radius:90%;*/'><i class="fa fa-list" aria-hidden="true"></i></button>
+</div>
+</div>
+		<div class="slide-down-page">
+		<canvas id="myChart" style="width:50%;height:50%;"></canvas>
+		</div>
+
+			
+				<script>
+					$(document).ready(function(){
+					$("#country_name_new").change(function(){
+						$(".btnnxt").removeAttr('disabled');
+					});
+					$(".input-nam").click(function(){
+						$(this).hide();
+						$(this).next('.input-nam-hata').removeAttr('hidden');
+					});
+					$(".input-nam-mela").click(function(){
+						if ($(this).parent().parent().hasClass('input-nam-hata')){
+						$(this).parent().parent('.input-nam-hata').attr('hidden','true');
+						$(this).parent().parent().prev('.input-nam').show();}
+						else if ($(this).parent().parent().parent().hasClass('input-nam-hata')){
+						$(this).parent().parent().parent('.input-nam-hata').attr('hidden','true');
+						$(this).parent().parent().parent().prev('.input-nam').show();}					
+					});
+					});
+					</script>
+
+        
+		
+		    <script type="text/javascript">
+        
+        (function() {
+            
+            var windowH = $(window).height(),
+                documElem = $(document),
+                slideDownPage = $('.slide-down-page'),
+                content = $('.content'),
+                btns = $('.btn1'),
+                animSpeed = 500;
+            
+            slideDownPage.css({
+                height: windowH + 'px',
+                top: -windowH + 'px'
+            });
+            
+            btns.on('click', function(e) {
+                if ( $(this).hasClass('open') ) {
+					$("body").css("overflow", "auto");
+                    slideDownPage.animate({'top': 0}, animSpeed);
+                    content.animate({'margin-top': windowH + 'px'}, animSpeed);
+                }
+                else {
+                    slideDownPage.animate({'top': -windowH + 'px'}, animSpeed);
+                    content.animate({'margin-top': 0}, animSpeed);
+                }
+                e.preventDefault();
+            });
+            
+            documElem.on('scroll', function() {
+                if ( $(this).scrollTop() > slideDownPage.height() && slideDownPage.css('top') === '0px' ) {
+                    slideDownPage.css('top', -windowH + 'px');
+                    content.css('margin-top', 0);
+                    documElem.scrollTop(0);
+					$("body").css("overflow","hidden");
+                }
+            });   
+        })();
+        
+        
+    </script>
+	<script>
+     $(document).ready(function(){
+        $(".btnnxt").click(function(){
+			if($(this).parent().parent().hasClass('home')){$("#resulticon").removeAttr("hidden");}
+            $(this).parent().parent("section").attr('hidden','true');
+            $(this).parent().parent().next('section').removeAttr('hidden');
+        });
+        $(".btnprev").click(function(){
+            $(this).parent().parent("section").attr('hidden','true');
+            $(this).parent().parent().prev('section').removeAttr('hidden');
+        });
+     });
+    </script>
+	<script>
+     $(document).ready(function(){
+        $(".pdcselect").change(function(){
+            $(this).parent().parent().next("div").children("input").removeAttr("disabled");
+        });
+     });
+    </script>
+	<!--<script>
+     $(document).ready(function(){
+		$("#resultgrapgh").hide();
+        $(".calculationsubmit").click(function(){
+            $("#questionpart").attr("hidden","true");
+            $("#pledge-items").removeAttr("hidden");
+			$("body").css("overflow-y","auto");
+			$("#resulticon").attr('hidden','true');
+			$("#resultgrapgh").show();
+			
+        });
+     });
+    </script>-->
+
+
+</body>
+</html>

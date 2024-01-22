@@ -1,0 +1,38 @@
+{%extends 'calnew.html'%}
+{% block div%}
+<center>
+    <div class="col-lg-8 form-inner-cont">
+
+                <h1>LOGIN</h1>
+                <br>
+
+                <form action="/login" method="post" class="signin-form">
+                  {{ csrf_token }}
+                  
+                    <div class="form">
+
+                      <h3>{{ message }}</h3>
+                       <center> 
+                        <div class="form-input">
+                            <input type="text" name="email" id="w3lSubject" placeholder="Enter your Email "
+                                required />
+                        </div>
+                        <br>
+                        <div class="form-input">
+                            <input type="password" name="password" id="w3lSender" placeholder="Enter your Password"
+                                required />
+                        </div>
+                        
+                    </center>
+                    </div>
+                    <br>
+                    <h6><a href="/forgot_password" >forgot password??</a></h6>
+                    <h6><a href="/register" >SignUp</a></h6>
+                    <br>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-style btn-primary">LOGIN</button>
+                    </div>
+                </form>
+            </div>
+</center>
+{% endblock %}

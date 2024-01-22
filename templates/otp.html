@@ -1,0 +1,28 @@
+{%extends 'calnew.html'%}
+{% block div%}
+<center>
+    <div class="col-lg-8 form-inner-cont">
+
+                <h1>Email Verification</h1>
+                <br>
+
+                <form action="/otp" method="post" class="signin-form">
+
+                    <div class="form">
+                        {{message}}
+                        <center>
+                        <div class="form-input">
+                            <input type="text" name="u_otp" id="w3lName" placeholder="Enter the OTP..."
+                                required="" />
+                        </div>
+                        <br>
+                    </center>
+                    </div>
+                    <br>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-style btn-primary">Verify</button>
+                    </div>
+                </form>
+            </div>
+</center>
+{% endblock %}

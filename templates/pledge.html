@@ -1,0 +1,382 @@
+{% extends 'calnew.html' %}
+{% block div %}
+	<script>
+		$(document).ready(function(){
+			$('body').css("overflow-y","auto");
+			var barChartData1 = {
+			labels: ["Electricity", "LPG uses", "CNG uses", "PNG uses", "Personal Car (small)","Personal Car (medium)", "Personal Car (large)", "Motor Bike", "Taxi", "Auto","Train", "Bus", "Flight (Domestic)", "Flight (International)", "Waste"],
+			datasets: [{
+				label: 'tonnes of carbon',
+				data: [{{result[1]}},{{result[2]}},{{result[3]}},{{result[4]}},{{result[5]}},{{result[6]}},{{result[7]}},{{result[8]}},{{result[9]}},{{result[10]}},{{result[11]}},{{result[12]}},{{result[13]}},{{result[14]}},{{result[15]}}],
+				backgroundColor: [
+									"#3e95cd",
+									"#3e95cd",
+									"#3e95cd",
+									"#3e95cd",
+									"#8e5ea2",
+									"#8e5ea2",
+									"#8e5ea2",
+									"#8e5ea2",
+									"#3cba9f",
+									"#3cba9f",
+									"#3cba9f",
+									"#3cba9f",
+									"#e8c3b9",
+									"#e8c3b9",
+									"#c45850"]
+			}]
+			};
+			  var context1 = document.getElementById('myChart1').getContext('2d');
+			  var myBar1 = new Chart(context1, {
+				  type: 'bar',
+
+				  data: barChartData1,
+				  options: {
+
+					  title:{
+						  display:false,
+						  text:"Chart.js Bar Chart - Stacked"
+					  },
+					  tooltips: {
+						  mode: 'label'
+					  }
+				  }
+			  });
+			  
+			  		var percentageresult = {{result[18]}};
+		if(percentageresult < 10){
+									$("body").css({"background":'url("../static/images/img.jpg") no-repeat',"background-position": 'center','background-attachment': 'fixed','background-size':'cover'});
+									$("#result_new").css("color",'green');
+									}
+		if(percentageresult >= 10){
+									$("body").css({"background":'url("../static/images/img.jpg") no-repeat',"background-position": 'center','background-attachment': 'fixed','background-size':'cover'});
+									$("#result_new").css("color",'yellow');
+									}
+		if(percentageresult >= 20){
+									$("body").css({"background":'url("../static/images/img.jpg") no-repeat',"background-position": 'center','background-attachment': 'fixed','background-size':'cover'});
+									$("#result_new").css("color",'blue');
+									}
+		if(percentageresult >= 35){
+									$("body").css({"background":'url("../static/images/img.jpg") no-repeat',"background-position": 'center','background-attachment': 'fixed','background-size':'cover'});
+									$("#result_new").css("color",'white');
+									}
+		if(percentageresult >= 55){
+									$("body").css({"background":'url("../static/images/img.jpg") no-repeat',"background-position": 'center','background-attachment': 'fixed','background-size':'cover'});
+									$("#result_new").css("color",'pink');
+									}
+		if(percentageresult >= 75){
+									$("body").css({"background":'url("../static/images/img.png") no-repeat',"background-position": 'center','background-attachment': 'fixed','background-size':'cover'});
+									$("#result_new").css("color",'orange');
+									}
+		if(percentageresult >= 90){
+									$("body").css({"background":'url("../static/images/img.png") no-repeat',"background-position": 'center','background-attachment': 'fixed','background-size':'cover'});
+									$("#result_new").css("color",'red');
+									}
+		});
+	</script>
+
+
+
+	<div class="row container" id="resultgrapgh" style='margin:auto;'>
+		<div style="border: 5px solid whitesmoke;margin: 0 200px;">
+			<div style="padding:25px;">
+			<p>Your personal carbon footprint is <span class="writtendatapledge">{{result[17]}}</span> tonnes of carbon dioxide equivalent per year.</p>
+			<div class="row">
+				<i class="fa fa-home fa-5x col-sm-2" style="color:green" aria-hidden="true"></i>
+				<p class="col-sm-10">This is equal to <br> Carbon captured & stored by <span class="writtendatapledge">{{result[17] * 260.6}}</span> trees per year.</p>
+			</div></div>
+		</div>
+		<br>
+		<div class="col-sm-6">
+			<div id="gauge1"></div>
+				<p class="text-center"> <span class="writtendatapledge">{{writtendata[0]}}</span> tonnes. of your carbon footprint comes from home energy use, <span class="writtendatapledge">{{writtendata[1]}}</span> tonnes. comes from transportation & <span class="writtendatapledge">{{writtendata[2]}}</span> tonnes. comes from waste.</p>
+		</div>
+		<div class="col-sm-6">
+			<div id="gauge2"></div>
+				<p class="text-center">Your footprint is <span class="writtendatapledge">{{writtendata[3]}}%</span> of the average for people in your country.</p>
+		</div>
+	</div>
+	<br><br>
+	<div id='but-hid'class="col-sm-12 text-center">
+		<a id="submit-pledge" class="btn btn-primary btn-lg" href="{{ url_for('status') }}">Status</a>
+	</div>
+	<br><br><br><br>
+	<div id='but-hid'class="col-sm-12 text-center">
+		
+		<a href="{{ url_for('rec') }}" class="btn btn-primary btn-lg" type="button" data-toggle="modal" >Recommendation</a>
+	</div>
+
+	<!-- <div class="modal fade" id="status" role="dialog" data-backdrop="static" data-keyboard="false">
+		<div class="modal-dialog modal-sm">
+		  <div class="modal-content">
+			<div class="modal-body">
+			<br>
+			if {{res}}>1
+			  <p>Your last carbon footprint is</p>
+			</div>
+			<div class="">
+		  <a href="{{ url_for('qhome1') }}" type="button" class="btn btn-default">Calculate Again</a>
+		<br><br>
+			</div>
+		  </div>
+		</div>
+	  </div> -->
+	<br><br>
+	<br><br>
+	<div class="container-fluid" style="width:98%;margin:auto;"><canvas id="myChart1"></canvas></div>
+	<br>
+	<section class="row">
+		<div class="col-md-offset-3 col-md-6">
+			<br>
+			<p class="text-center"><a data-toggle="collapse" data-target="#other-footprint" class='other-foot'>What Else Affects My Footprint?</a></p>
+		</div>
+		<div id="other-footprint" class="collapse col-sm-6 col-sm-offset-3">
+			<p>While this calculator focuses on direct emissions from your home energy use and transportation habits, when the <i>indirect</i> impacts of our lives are considered, that footprint becomes larger. What you eat, how much water you use, the products you buy, how you dispose of waste, and how you take care of your yard all contribute to your total carbon footprint. Luckily, you can make an impact with these choices every day: get started by making a pledge below!</p>       
+		</div>
+	</section>
+	<br>
+	<section class="row" id="pledge-items">
+
+		<div class='row container' style='margin:auto;'>
+		<div class='col-sm-4 col-md-4'>
+			<div class='text-center pledge-chk'>
+				<div class='' data-pledge='1'>
+					<i class="fa fa-lightbulb-o fa-5x" aria-hidden="true"></i>
+					<h3>Replace Incandescent Bulbs with CFLs or LEDs</h3>
+
+					<br>
+					<br><br><br><input type="checkbox" hidden>
+					<div align='center'><div class='chkbx'style='width:30px;height:30px;border:1px solid grey;border-radius:5px;'></div><div class='chkbxchkd' hidden>&nbsp;<i class="fa fa-check-square-o fa-3x" aria-hidden="true"></i></div></div>
+				</div>
+			</div>
+		</div>
+		
+		<div class='col-sm-4 col-md-4'>
+			<div class='text-center pledge-chk'>
+				<div class='' data-pledge='1'>
+					<i class="fa fa-plug fa-5x" aria-hidden="true"></i>
+					<h3>Use a Power Strip for Electronics and Turn it Off When Not in Use</h3>
+
+					<br>
+					<br><br><br><input type="checkbox" hidden>
+					<div align='center'><div class='chkbx'style='width:30px;height:30px;border:1px solid grey;border-radius:5px;'></div><div class='chkbxchkd' hidden>&nbsp;<i class="fa fa-check-square-o fa-3x" aria-hidden="true"></i></div></div>
+				</div>
+			</div>
+		</div>
+		<div class='col-sm-4 col-md-4'>
+			<div class='text-center pledge-chk'>
+				<div class='' data-pledge='1'>
+					<i class="fa fa-star fa-5x" aria-hidden="true"></i>
+					<h3>Buy electrical appliances which are energy star rated</h3>
+
+					<br>
+					<br><br><br><input type="checkbox" hidden>
+					<div align='center'><div class='chkbx'style='width:30px;height:30px;border:1px solid grey;border-radius:5px;'></div><div class='chkbxchkd' hidden>&nbsp;<i class="fa fa-check-square-o fa-3x" aria-hidden="true"></i></div></div>
+				</div>
+			</div>
+		</div>
+		</div>
+		<br>
+		<div class='row container' style='margin:auto;'>
+		<div class='col-sm-4 col-md-4'>
+			<div class='text-center pledge-chk'>
+				<div class='' data-pledge='1'>
+					<i class="fa fa-train fa-5x" aria-hidden="true"></i>
+					<h3>Use public transport where possible</h3>
+
+					<br>
+					<br><br><br><input type="checkbox" hidden>
+					<div align='center'><div class='chkbx'style='width:30px;height:30px;border:1px solid grey;border-radius:5px;'></div><div class='chkbxchkd' hidden>&nbsp;<i class="fa fa-check-square-o fa-3x" aria-hidden="true"></i></div></div>
+				</div>
+			</div>
+		</div>
+		<div class='col-sm-4 col-md-4'>
+			<div class='text-center pledge-chk'>
+				<div class='' data-pledge='1'>
+					<i class="fa fa-plane fa-5x" aria-hidden="true"></i>
+					<h3>Avoid business air travel, if feasible, and opt for Audio or Video Conferencing</h3>
+
+					<br>
+					<br><br><br><input type="checkbox" hidden>
+					<div align='center'><div class='chkbx'style='width:30px;height:30px;border:1px solid grey;border-radius:5px;'></div><div class='chkbxchkd' hidden>&nbsp;<i class="fa fa-check-square-o fa-3x" aria-hidden="true"></i></div></div>
+				</div>
+			</div>
+		</div>
+		<div class='col-sm-4 col-md-4'>
+			<div class='text-center pledge-chk'>
+				<div class='' data-pledge='1'>
+					<i class="fa fa-pagelines fa-5x" aria-hidden="true"></i>
+					<h3>Plant Tree</h3>
+
+					<br>
+					<br><br><br><input type="checkbox" hidden>
+					<div align='center'><div class='chkbx'style='width:30px;height:30px;border:1px solid grey;border-radius:5px;'></div><div class='chkbxchkd' hidden>&nbsp;<i class="fa fa-check-square-o fa-3x" aria-hidden="true"></i></div></div>
+				</div>
+			</div>
+		</div>
+		</div>
+		<br>
+		<div class='row container' style='margin:auto;'>
+		<div class='col-sm-4 col-md-4'>
+			<div class='text-center pledge-chk'>
+				<div class='' data-pledge='1'>
+					<i class="fa fa-recycle fa-5x" aria-hidden="true"></i>
+					<h3>Recycle Bottles, Cans and Paper</h3>
+
+					<br>
+					<br><br><br><input type="checkbox" hidden>
+					<div align='center'><div class='chkbx'style='width:30px;height:30px;border:1px solid grey;border-radius:5px;'></div><div class='chkbxchkd' hidden>&nbsp;<i class="fa fa-check-square-o fa-3x" aria-hidden="true"></i></div></div>
+				</div>
+			</div>
+		</div>
+		<div class='col-sm-4 col-md-4'>
+			<div class='text-center pledge-chk'>
+				<div class='' data-pledge='1'>
+					<i class="fa fa-bicycle fa-5x" aria-hidden="true"></i>
+					<h3>Ride a Bike Instead of Driving</h3>
+
+					<br>
+					<br><br><br><input type="checkbox" hidden>
+					<div align='center'><div class='chkbx'style='width:30px;height:30px;border:1px solid grey;border-radius:5px;'></div><div class='chkbxchkd' hidden>&nbsp;<i class="fa fa-check-square-o fa-3x" aria-hidden="true"></i></div></div>
+				</div>
+			</div>
+		</div>
+		<div class='col-sm-4 col-md-4'>
+			<div class='text-center pledge-chk'>
+				<div class='' data-pledge='1'>
+					<i class="fa fa-shower fa-5x" aria-hidden="true"></i>
+					<h3>Shorten Your Showers</h3>
+
+					<br>
+					<br><br><br><input type="checkbox" hidden>
+					<div align='center'><div class='chkbx'style='width:30px;height:30px;border:1px solid grey;border-radius:5px;'></div><div class='chkbxchkd' hidden>&nbsp;<i class="fa fa-check-square-o fa-3x" aria-hidden="true"></i></div></div>
+				</div>
+			</div>
+		</div>
+		</div>
+	</section><br><br>
+	<div class="row">
+        <div id='but-hid'class="col-sm-12 text-center">
+            <a id="submit-pledge" class="btn btn-primary btn-lg" type="button" data-toggle="modal" data-target="#thankmodal">Make Your Pledge!</a>
+        </div>
+		<script>
+		$('#submit-pledge').click(function(){
+			$('#but-hid').attr('hidden','true');
+			$('#pledge-thank').removeAttr('hidden');
+			$("#pledge-items *").attr("disabled", "disabled").off('click');
+		});
+		</script>
+       <!-- <div id='pledge-thank'class="col-sm-8 col-sm-offset-2" hidden>
+            <div class="text-center" style='background:ghostwhite;'>
+				<br>
+                <h3>Thank you for your pledge!</h3><p style="text-align:center">Your actions will prevent the atmosphere</p><br>
+			</div>
+        </div>
+    </div>
+-->
+		  <!-- Modal -->
+  <div class="modal fade" id="thankmodal" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-body">
+		<br>
+          <p>Thank You for taking the Carbon Pledge and commiting to save Planet Earth!</p>
+        </div>
+        <div class="">
+	  <a href="{{ url_for('qhome1') }}" type="button" class="btn btn-default">Calculate Again</a>
+	<br><br>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="thankmodal" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-body">
+		<br>
+          <p>Thank You for taking the Carbon Pledge and commiting to save Planet Earth!</p>
+        </div>
+        <div class="">
+	  <a href="{{ url_for('qhome1') }}" type="button" class="btn btn-default">Calculate Again</a>
+	<br><br>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="thankmodal" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-body">
+		<br>
+          <p>Thank You for taking the Carbon Pledge and commiting to save Planet Earth!</p>
+        </div>
+        <div class="">
+	  <a href="{{ url_for('qhome1') }}" type="button" class="btn btn-default">Calculate Again</a>
+	<br><br>
+        </div>
+      </div>
+    </div>
+  </div>
+	
+
+		
+	<script>
+    $(document).ready(function(){
+        var gg1 = new JustGage({
+            id: "gauge1",
+			min:0,
+			max:{{result[0]+5}},
+			Decimals: 2,
+			value:{{result[17]}},
+            valueFontColor:"#0a2c5c",
+            gaugeWidthScale: 0.7,
+            formatNumber: true,
+			title:'Your Annual Footprint',
+			titleFontColor: "#0a2c5c",
+			label: "tonnes of carbon",
+			labelFontColor: "#0a2c5c",
+			levelColors: ['#00FF00', '#66ff00', '#ccff00', '#FFFF00', '#ff9900', '#FF3300','#FF0000']
+		
+        });
+        var gg2 = new JustGage({
+            id: "gauge2",
+			min:0,
+			max:{{result[0]+5}},
+			value:{{result[0]}},
+            valueFontColor:"#0a2c5c",
+            gaugeWidthScale: 0.7,
+            formatNumber: true,
+			title:'Country Average',
+			titleFontColor: "#0a2c5c",
+			label: "tonnes of carbon",
+			labelFontColor: "#0a2c5c",
+			levelColors: ['#85A137']
+		
+        });
+    });
+    </script>
+	<script>
+		$(document).ready(function(){
+			$('.pledge-chk').click(function(){
+				if (!$(this).hasClass('well')) {
+				$(this).addClass('well');
+				$(this).find("input[type=checkbox]").attr('checked','checked');
+				$(this).find(".chkbx").attr('hidden','true');
+				$(this).find(".chkbxchkd").removeAttr('hidden');
+				
+				
+				}else {$(this).removeClass('well');
+				$(this).find("input[type=checkbox]").removeAttr('checked');
+				$(this).find(".chkbx").removeAttr('hidden');
+				$(this).find(".chkbxchkd").attr('hidden','true');
+				
+				}
+			});
+		});
+	</script>
+	
+{% endblock %}

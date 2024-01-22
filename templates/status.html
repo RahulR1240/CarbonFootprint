@@ -1,0 +1,89 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Carbon Footprint</title>
+
+    <link href="//fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="static/assets/css/style-starter.css">
+  </head>
+  <body style="background-image: url(/static/images/img2.jpg);background-size: cover;">
+<!-- header -->
+
+
+<h1>Status of your Carbon footprint</h1>
+<h2>Maximum Value:</h2>
+<p>{{ max_value }}</p>
+<h2>Graph:</h2>
+<img src="{{ url_for('static', filename='graph.png') }}" alt="Carbon Footprint Graph">
+<a href="{{ url_for('pledge') }}">Back to Home</a>
+
+
+<!-- disable body scroll which navbar is in active -->
+<script>
+  $(function () {
+    $('.navbar-toggler').click(function () {
+      $('body').toggleClass('noscroll');
+    })
+  });
+</script>
+<!-- disable body scroll which navbar is in active -->
+
+<!-- Template JavaScript -->
+<script src="static/assets/js/jquery-3.3.1.min.js"></script>
+
+<!-- theme changer js -->
+<script src="static/assets/js/theme-change.js"></script>
+<!-- //theme changer js -->
+
+<!-- courses owlcarousel -->
+<script src="static/assets/js/owl.carousel.js"></script>
+
+<!-- script for testimonials -->
+<script>
+  $(document).ready(function () {
+    $('.owl-testimonial').owlCarousel({
+      loop: true,
+      margin: 0,
+      nav: true,
+      responsiveClass: true,
+      autoplay: false,
+      autoplayTimeout: 5000,
+      autoplaySpeed: 1000,
+      autoplayHoverPause: false,
+      responsive: {
+        0: {
+          items: 1,
+          nav: false
+        },
+        480: {
+          items: 1,
+          nav: false
+        },
+        667: {
+          items: 1,
+          nav: true
+        },
+        1000: {
+          items: 1,
+          nav: true
+        }
+      }
+    })
+  })
+</script>
+<!-- //script for testimonials -->
+
+<!-- bootstrap -->
+<script src="static/assets/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+{%extends 'calnew.html'%}
+{% block div%}
+<center>
+    <div class="col-lg-8 form-inner-cont">
+
+                <h1>Register Now!!</h1>
+                <br>
+
+                <form action="/register" method="post" class="signin-form">
+
+                    <div class="form">
+                      {{ message }}
+                        <center>
+                        <div class="form-input">
+                            <input type="text" name="full_name" id="w3lName" placeholder="Enter your full name"
+                                required="" />
+                        </div>
+                        <br>
+                        <div class="form-input">
+                            <input type="text" name="email" id="w3lSubject" placeholder="Enter your Email "
+                                required />
+                        </div>
+                        <br>
+                        <div class="form-input">
+                            <input type="password" name="password" id="w3lSender" placeholder="Enter your Password"
+                                required />
+                        </div>
+                        <br>
+                        <div class="form-input">
+                            <input type="password" name="repassword" id="w3lPhone" placeholder="Enter Password Again"
+                                required />
+                        </div>
+                    </center>
+                    </div>
+                    <br>
+                    <h6><a href="/login" >Already have an account? login..</a></h6>
+                    <br>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-style btn-primary">REGISTER</button>
+                    </div>
+                </form>
+            </div>
+</center>
+{% endblock %}

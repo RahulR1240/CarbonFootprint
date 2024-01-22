@@ -1,0 +1,322 @@
+{%extends 'calnew.html'%}
+{% block div%}
+<div style=" position: absolute; right: 25px;top: 25px;" >
+	
+		<a class="nav-link" href="/add_blog">
+			<button class="btn btn-primary" style="position:relative; right: 0;" >Blog</button>
+		</a>
+		
+			<a class="nav-link" href="/my_blogs">
+				
+				<button class="btn btn-primary" style="position:relative; right: 0;" >My Blogs</button>
+			</a>
+		
+		<a class="nav-link" href="/about">
+			<button class="btn btn-primary" >About</button>
+		</a>
+		<a class="nav-link" href="/logout">
+			<button class="btn btn-primary" >Logout</button>
+		</a>
+		<a class="nav-link" href="/contact">
+			<button class="btn btn-primary" >Contact</button>
+		</a>
+	
+</div><br>
+<section id="questionpart">
+	
+	<form method='POST' action="/pledge/" onkeypress="return event.keyCode != 13;">
+	<section id="home" class="home">
+	<div style='color:#3299dd' class="heading"> <span> Carbon Footprint Calculator</span></div><br>
+	<hr style='width:30%;margin:auto;border-color:#3299dd;margin-top:-10px;'>
+	<div>
+		<br><img src='../static/images/aqws.png' height='200' width='350'>
+	</div>
+	<br>
+	
+	<div>
+		<p style='font-size:2em;'>Where do you live?</p>
+	</div>
+	<div class="form-group questions">
+		<select name="" id="country_name_new" class="form-control input-lg" required>
+			<option value="" selected disabled>Select Country</option>
+			{% for o in data['country'] %}
+            <option value="{{o}}">{{ o }}</option>
+            {% endfor %}
+
+		</select>
+	</div>
+	<div>
+		<br>
+		<button type="button" class="btn btn-default btnnxt" disabled>Next <span><i class="fa fa-angle-double-right"></i></span></button>
+	</div>
+	</section>
+	<section id="Household" hidden= true>
+			<div style='color:#3299dd' class="heading"><i class="fa fa-home" aria-hidden="true"></i> <span> Household</span></div><br>
+	<hr style='width:30%;margin:auto;border-color:#3299dd;margin-top:-10px;'>
+	<br>
+	<div class='question_'>
+		<div class='row input-nam'>
+			No. of people in your household?
+		</div>
+		<div class='row input-nam-hata' hidden>
+				<div class='col-md-6' style='line-height:50px;'><i class="fa fa-times fa-2x input-nam-mela" aria-hidden="true" style='line-height:50px;'></i>No. of people in your household.</div>
+				<div class='col-md-6' style='padding:0;'>
+					<input type="number" step="any" style='border-radius:30px;height:50px;' id="no_people_input_new" name="" class="form-control" placeholder="0" value="1" min="0" max="99999">
+				</div>
+		</div>
+		<br>
+		<div class='row input-nam'>
+			Electricity consumption in your household?
+		</div>
+		<div class='row input-nam-hata' hidden>
+				<div class='col-md-6'><i class="fa fa-times fa-2x input-nam-mela" aria-hidden="true" style='line-height:50px;'></i>Electricity consumption in your household.</div>
+				<div class='col-md-6 input-group' style='padding:0;'>
+					<input type="number" step="any" style='border-top-left-radius:30px;border-bottom-left-radius:30px;height:50px;' id="electricity_input_new" name="" class="form-control" placeholder="0" value="0" min="0" max="99999">
+					<span class="input-group-addon" style='border-top-right-radius:30px;border-bottom-right-radius:30px;height:50px;'>kWh /   <span><select id="yrmnthslct_electricity" class='yrmnthslct'><option value="month">Month</option><option value="year">Year</option></select></span></span>
+				</div>
+		</div>
+		<br>
+		<div class='row input-nam'>
+			LPG
+		</div>
+		<div class='row input-nam-hata' hidden>
+				<div class='col-md-6'><i class="fa fa-times fa-2x input-nam-mela" aria-hidden="true" style='line-height:50px;'></i>LPG</div>
+				<div class='col-md-6 input-group' style='padding:0;'>
+					<input type="number" step="any" style='border-top-left-radius:30px;border-bottom-left-radius:30px;height:50px;' id="lpg_new" name="" class="form-control" placeholder="0" value="0" min="0" max="99999">
+					<span class="input-group-addon" style='border-top-right-radius:30px;border-bottom-right-radius:30px;height:50px;'>kg / <span><select id="yrmnthslct_lpg" class='yrmnthslct'><option value="month">Month</option><option value="year">Year</option></select></span></span></span>
+				</div>
+		</div>
+		<br>
+		<div class='row input-nam'>
+			CNG
+		</div>
+		<div class='row input-nam-hata' hidden>
+				<div class='col-md-6'><i class="fa fa-times fa-2x input-nam-mela" aria-hidden="true" style='line-height:50px;'></i>CNG</div>
+				<div class='col-md-6 input-group' style='padding:0;'>
+					<input type="number" step="any" style='border-top-left-radius:30px;border-bottom-left-radius:30px;height:50px;' id="cng_new" name="" class="form-control" placeholder="0" value="0" min="0" max="99999">
+					<span class="input-group-addon" style='border-top-right-radius:30px;border-bottom-right-radius:30px;height:50px;'>kg /  <span><select id="yrmnthslct_cng" class='yrmnthslct'><option value="month">Month</option><option value="year">Year</option></select></span></span></span>
+				</div>
+		</div>
+		<br>
+		<div class='row input-nam'>
+			PNG
+		</div>
+		<div class='row input-nam-hata' hidden>
+				<div class='col-md-6'><i class="fa fa-times fa-2x input-nam-mela" aria-hidden="true" style='line-height:50px;'></i>PNG</div>
+				<div class='col-md-6 input-group' style='padding:0;'>
+					<input type="number" step="any" style='border-top-left-radius:30px;border-bottom-left-radius:30px;height:50px;' id="png_new" name="" class="form-control" placeholder="0" value="0" min="0" max="99999">
+					<span class="input-group-addon" style='border-top-right-radius:30px;border-bottom-right-radius:30px;height:50px;'>kg /  <span><select id="yrmnthslct_png" class='yrmnthslct'><option value="month">Month</option><option value="year">Year</option></select></span></span></span>
+				</div>
+		</div>
+
+	</div>
+	<div>
+		<br>
+		<button type="button" class="btn btn-default btnprev"><i class="fa fa-angle-double-left"></i></button>
+		<button type="button" class="btn btn-default btnnxt">Next <span><i class="fa fa-angle-double-right"></i></span></button>
+	</div>
+	</section>
+
+	<section id="personalvechile" hidden= true>
+			<div style='color:#3299dd' class="heading"><i class="fa fa-car" aria-hidden="true"></i> <span> Personal Vechile</span></div><br>
+	<hr style='width:30%;margin:auto;border-color:#3299dd;margin-top:-10px;'>
+	<br>
+	<div class='question_'>
+		<div class='row input-nam'>
+			Small Car
+		</div>
+		<div class='row input-nam-hata' hidden>
+				<div class='col-md-6' style='line-height:50px;'>
+					<div class='col-md-6' style='padding:0;'><i class="fa fa-times fa-2x input-nam-mela" aria-hidden="true" style='line-height:50px;'></i>Small Car</div>
+					<div class='col-md-6 input-group pdcselectdiv' style='padding:0;'>
+						<select name="" id="smallfuel" class="form-control input-lg pdcselect" style='border-radius:30px;height:50px;'>
+							<option value="" selected disabled>Fuel Type</option>
+							<option value="petrol">Petrol</option>
+							<option value="diesel">Diesel</option>
+							<option value="cng">CNG</option>
+						</select>
+					</div>
+				</div>
+				
+					
+				<div class='col-md-6 input-group cardis' hidden style='padding:0;'>
+					<input disabled type="number" step="any" style='border-top-left-radius:30px;border-bottom-left-radius:30px;height:50px;' id="smallcar_new" name="" class="form-control" placeholder="0" value="0" min="0" max="99999">
+					<span class="input-group-addon" style='border-top-right-radius:30px;border-bottom-right-radius:30px;height:50px;'>km /  <span><select id="yrmnthslct_smallcar" class='yrmnthslct'><option value="month">Month</option><option value="year">Year</option></select></span></span></span>
+				</div>
+		</div>
+		<br>
+		<div class='row input-nam'>
+			Medium Car
+		</div>
+		<div class='row input-nam-hata' hidden>
+				<div class='col-md-6' style='line-height:50px;'>
+					<div class='col-md-6' style='padding:0;'><i class="fa fa-times fa-2x input-nam-mela" aria-hidden="true" style='line-height:50px;'></i>Medium Car</div>
+					<div class='col-md-6 input-group pdcselectdiv' style='padding:0;'>
+						<select name="" id="mediumfuel" class="form-control input-lg pdcselect" style='border-radius:30px;height:50px;'>
+							<option value="" selected disabled>Fuel Type</option>
+							<option value="petrol">Petrol</option>
+							<option value="diesel">Diesel</option>
+							<option value="cng">CNG</option>
+						</select>
+					</div>
+				</div>
+				<div class='col-md-6 input-group' style='padding:0;'>
+					<input disabled type="number" step="any" style='border-top-left-radius:30px;border-bottom-left-radius:30px;height:50px;' id="mediumcar_new" name="" class="form-control" placeholder="0" value="0" min="0" max="99999">
+					<span class="input-group-addon" style='border-top-right-radius:30px;border-bottom-right-radius:30px;height:50px;'>km /  <span><select id="yrmnthslct_mediumcar" class='yrmnthslct'><option value="month">Month</option><option value="year">Year</option></select></span></span></span>
+				</div>
+		</div>
+		<br>
+		<div class='row input-nam'>
+			Large Car
+		</div>
+		<div class='row input-nam-hata' hidden>
+				<div class='col-md-6' style='line-height:50px;'>
+					<div class='col-md-6' style='padding:0;'><i class="fa fa-times fa-2x input-nam-mela" aria-hidden="true" style='line-height:50px;'></i>Large Car</div>
+					<div class='col-md-6 input-group pdcselectdiv' style='padding:0;'>
+						<select name="" id="largefuel" class="form-control input-lg pdcselect" style='border-radius:30px;height:50px;'>
+							<option value="" selected disabled>Fuel Type</option>
+							<option value="petrol">Petrol</option>
+							<option value="diesel">Diesel</option>
+							<option value="cng">CNG</option>
+						</select>
+					</div>
+				</div>
+				<div class='col-md-6 input-group' style='padding:0;'>
+					<input disabled type="number" step="any" style='border-top-left-radius:30px;border-bottom-left-radius:30px;height:50px;' id="largecar_new" name="" class="form-control" placeholder="0" value="0" min="0" max="99999">
+					<span class="input-group-addon" style='border-top-right-radius:30px;border-bottom-right-radius:30px;height:50px;'>km /  <span><select id="yrmnthslct_largecar" class='yrmnthslct'><option value="month">Month</option><option value="year">Year</option></select></span></span></span>
+				</div>
+		</div>
+		<br>
+		<div class='row input-nam'>
+			Motor Bike
+		</div>
+		<div class='row input-nam-hata' hidden>
+				<div class='col-md-6'><i class="fa fa-times fa-2x input-nam-mela" aria-hidden="true" style='line-height:50px;'></i>Motor Bike</div>
+				<div class='col-md-6 input-group' style='padding:0;'>
+					<input type="number" step="any" style='border-top-left-radius:30px;border-bottom-left-radius:30px;height:50px;' id="bike_new" name="" class="form-control" placeholder="0" value="0" min="0" max="99999">
+					<span class="input-group-addon" style='border-top-right-radius:30px;border-bottom-right-radius:30px;height:50px;'>km /  <span><select id="yrmnthslct_bike" class='yrmnthslct'><option value="month">Month</option><option value="year">Year</option></select></span></span></span>
+				</div>
+		</div>
+	</div>
+	<div>
+		<br>
+		<button type="button" class="btn btn-default btnprev"><i class="fa fa-angle-double-left"></i></button>
+		<button type="button" class="btn btn-default btnnxt">Next <span><i class="fa fa-angle-double-right"></i></span></button>
+	</div>
+	</section>
+
+	<section id="publictransport" hidden= true>
+			<div style='color:#3299dd' class="heading"><i class="fa fa-train" aria-hidden="true"></i> <span> Public Transport</span></div><br>
+	<hr style='width:30%;margin:auto;border-color:#3299dd;margin-top:-10px;'>
+	<br>
+	<div class='question_'>
+		<div class='row input-nam'>
+			Taxi
+		</div>
+		<div class='row input-nam-hata' hidden>
+				<div class='col-md-6' style='line-height:50px;'><i class="fa fa-times fa-2x input-nam-mela" aria-hidden="true" style='line-height:50px;'></i>Taxi</div>
+				<div class='col-md-6 input-group' style='padding:0;'>
+					<input type="number" step="any" style='border-top-left-radius:30px;border-bottom-left-radius:30px;height:50px;' id="taxi_new" name="" class="form-control" placeholder="0" value="0" min="0" max="99999">
+					<span class="input-group-addon" style='border-top-right-radius:30px;border-bottom-right-radius:30px;height:50px;'>km /  <span><select id="yrmnthslct_taxi" class='yrmnthslct'><option value="month">Month</option><option value="year">Year</option></select></span></span></span>
+				</div>
+		</div>
+		<br>
+		<div class='row input-nam'>
+			Auto
+		</div>
+		<div class='row input-nam-hata' hidden>
+				<div class='col-md-6'><i class="fa fa-times fa-2x input-nam-mela" aria-hidden="true" style='line-height:50px;'></i>Auto</div>
+				<div class='col-md-6 input-group' style='padding:0;'>
+					<input type="number" step="any" style='border-top-left-radius:30px;border-bottom-left-radius:30px;height:50px;' id="auto_new" name="" class="form-control" placeholder="0" value="0" min="0" max="99999">
+					<span class="input-group-addon" style='border-top-right-radius:30px;border-bottom-right-radius:30px;height:50px;'>km /  <span><select id="yrmnthslct_auto" class='yrmnthslct'><option value="month">Month</option><option value="year">Year</option></select></span></span></span>
+				</div>
+		</div>
+		<br>
+		<div class='row input-nam'>
+			Train
+		</div>
+		<div class='row input-nam-hata' hidden>
+				<div class='col-md-6'><i class="fa fa-times fa-2x input-nam-mela" aria-hidden="true" style='line-height:50px;'></i>Train</div>
+				<div class='col-md-6 input-group' style='padding:0;'>
+					<input type="number" step="any" style='border-top-left-radius:30px;border-bottom-left-radius:30px;height:50px;' id="train_new" name="" class="form-control" placeholder="0" value="0" min="0" max="99999">
+					<span class="input-group-addon" style='border-top-right-radius:30px;border-bottom-right-radius:30px;height:50px;'>km /  <span><select id="yrmnthslct_train" class='yrmnthslct'><option value="month">Month</option><option value="year">Year</option></select></span></span></span>
+				</div>
+		</div>
+		<br>
+		<div class='row input-nam'>
+			Bus
+		</div>
+		<div class='row input-nam-hata' hidden>
+				<div class='col-md-6'><i class="fa fa-times fa-2x input-nam-mela" aria-hidden="true" style='line-height:50px;'></i>Bus</div>
+				<div class='col-md-6 input-group' style='padding:0;'>
+					<input type="number" step="any" style='border-top-left-radius:30px;border-bottom-left-radius:30px;height:50px;' id="bus_new" name="" class="form-control" placeholder="0" value="0" min="0" max="99999">
+					<span class="input-group-addon" style='border-top-right-radius:30px;border-bottom-right-radius:30px;height:50px;'>km /  <span><select id="yrmnthslct_bus" class='yrmnthslct'><option value="month">Month</option><option value="year">Year</option></select></span></span></span>
+				</div>
+		</div>
+	</div>
+	<div>
+		<br>
+		<button type="button" class="btn btn-default btnprev"><i class="fa fa-angle-double-left"></i></button>
+		<button type="button" class="btn btn-default btnnxt">Next <span><i class="fa fa-angle-double-right"></i></span></button>
+	</div>
+	</section>
+	<section id="flight" hidden= true>
+			<div style='color:#3299dd' class="heading"><i class="fa fa-plane" aria-hidden="true"></i> <span> Flight</span></div><br>
+	<hr style='width:30%;margin:auto;border-color:#3299dd;margin-top:-10px;'>
+	<br>
+	<div class='question_'>
+		<div class='row input-nam'>
+			Domestic Flight
+		</div>
+		<div class='row input-nam-hata' hidden>
+				<div class='col-md-6' style='line-height:50px;'><i class="fa fa-times fa-2x input-nam-mela" aria-hidden="true" style='line-height:50px;'></i>Domestic Flight</div>
+				<div class='col-md-6 input-group' style='padding:0;'>
+					<input type="number" step="any" style='border-top-left-radius:30px;border-bottom-left-radius:30px;height:50px;' id="domflight_new" name="" class="form-control" placeholder="0" value="0" min="0" max="99999">
+					<span class="input-group-addon" style='border-top-right-radius:30px;border-bottom-right-radius:30px;height:50px;'>km /  <span><select id="yrmnthslct_dom" class='yrmnthslct'><option value="month">Month</option><option value="year">Year</option></select></span></span></span>
+				</div>
+		</div>
+		<br>
+		<div class='row input-nam'>
+			International Flight
+		</div>
+		<div class='row input-nam-hata' hidden>
+				<div class='col-md-6'><i class="fa fa-times fa-2x input-nam-mela" aria-hidden="true" style='line-height:50px;'></i>International Flight</div>
+				<div class='col-md-6 input-group' style='padding:0;'>
+					<input type="number" step="any" style='border-top-left-radius:30px;border-bottom-left-radius:30px;height:50px;' id="intflight_new" name="" class="form-control" placeholder="0" value="0" min="0" max="99999">
+					<span class="input-group-addon" style='border-top-right-radius:30px;border-bottom-right-radius:30px;height:50px;'>km /  <span><select id="yrmnthslct_int" class='yrmnthslct'><option value="month">Month</option><option value="year">Year</option></select></span></span></span>
+				</div>
+		</div>
+	</div>
+	<div>
+		<br>
+		<button type="button" class="btn btn-default btnprev"><i class="fa fa-angle-double-left"></i></button>
+		<button type="button" class="btn btn-default btnnxt">Next <span><i class="fa fa-angle-double-right"></i></span></button>
+	</div>
+	</section>
+
+	<section id="waste" hidden= true>
+			<div style='color:#3299dd' class="heading"><i class="fa fa-trash" aria-hidden="true"></i> <span> Waste Generation</span></div><br>
+	<hr style='width:30%;margin:auto;border-color:#3299dd;margin-top:-10px;'>
+	<br>
+	<div class='question_'>
+		<div class='row input-nam'>
+			Domestic Waste
+		</div>
+		<div class='row input-nam-hata' hidden>
+				<div class='col-md-6' style='line-height:50px;'><i class="fa fa-times fa-2x input-nam-mela" aria-hidden="true" style='line-height:50px;'></i>Domestic Waste</div>
+				<div class='col-md-6 input-group' style='padding:0;'>
+					<input type="number" step="any" style='border-top-left-radius:30px;border-bottom-left-radius:30px;height:50px;' id="waste_new" name="" class="form-control" placeholder="0" value="0" min="0" max="99999">
+					<span class="input-group-addon" style='border-top-right-radius:30px;border-bottom-right-radius:30px;height:50px;'>kg / <span><select id="yrmnthslct_waste" class='yrmnthslct'><option value="month">Month</option><option value="year">Year</option></select></span></span>
+				</div>
+		</div>
+	</div>
+	<div>
+		<br>
+		<button type="button" class="btn btn-default btnprev"><i class="fa fa-angle-double-left"></i></button>
+		<button type="submit" class="btn btn-default calculationsubmit">Submit <span><i class="fa fa-angle-double-right"></i></span></button>
+	</div>
+	</section>
+	</form>
+</section>
+	
+{% endblock %}
